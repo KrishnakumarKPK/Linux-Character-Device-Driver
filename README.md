@@ -54,6 +54,8 @@ The Linux device driver:
 - Handles open, read, write, and release system calls.  
 - Resides in **kernel space** and is loaded as a **kernel module (`.ko`)**.  
 
+![Driver Code](http://i.imgur.com/t1tn3da.gif)  
+
 ## 🛠️ Compiling the Driver  
 Use the **kernel's kbuild system** via a `Makefile`:  
 ```makefile  
@@ -65,6 +67,9 @@ all:
 clean:  
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean  
 ```  
+
+![Makefile Screenshot](http://i.imgur.com/wAYM9fV.png)  
+
 Compile using:  
 ```bash  
 make  
@@ -78,6 +83,10 @@ cat /proc/modules         # Check if loaded
 cat /proc/devices         # Confirm device name  
 sudo rmmod myDev          # Unload driver  
 ```  
+
+![Modules Output](http://i.imgur.com/oabfAzy.png)  
+![Devices Output](http://i.imgur.com/yIeN5as.png)  
+
 > ℹ️ Use `modprobe` if dependencies need to be resolved automatically.  
 
 ## ✅ Testing the Driver  
@@ -86,16 +95,26 @@ Write and read to/from the device file:
 echo "Hello" > /dev/myDev  
 cat /dev/myDev  
 ```  
-Or compile and run the test program:  
+
+![Testing the Driver](http://i.imgur.com/dpdSmHT.png)  
+
+You can also run the provided C test program:  
 ```bash  
 gcc test.c -o test  
 sudo ./test HelloWorld  
 ```  
+
+![Test Program Code](http://i.imgur.com/PncaPdn.png)  
+![Test Program Output](http://i.imgur.com/sB83VaF.png)  
 
 ## ⚠️ Notes  
 - You need **root access** (`sudo`) to load/unload kernel modules and access device files.  
 - This project uses the **old-style character driver interface**, which is still supported in modern Linux kernels.  
 - Ensure the major number is not already in use.  
 
+## 👨‍💻 Author  
+**Krishna Kumar Kondooru**  
+[GitHub](https://github.com/KrishnakumarKPK) | [LinkedIn](https://www.linkedin.com/in/kondooru-krishna-kumar)  
 
-
+---  
+Feel free to ⭐ this repository if it helped you learn something about Linux drivers!
